@@ -1,0 +1,38 @@
+[
+  {
+    "id": "u-1", "email": "hr@janamen.kz", "password": "Passw0rd!", "role": "hr",
+    "full_name": "Айгерим Сапарова", "company": "JanaMen Group", "position": "HR Business Partner",
+    "department": "HR", "manager_id": null, "hire_date": "2019-03-11",
+    "vacation_days_left": 18, "salary": 650000, "personnel_number": "00001"
+  },
+  {
+    "id": "u-2", "email": "manager@janamen.kz", "password": "Passw0rd!", "role": "manager",
+    "full_name": "Ерлан Тулеуов", "company": "JanaMen Group", "position": "Руководитель отдела разработки",
+    "department": "IT", "manager_id": null, "hire_date": "2018-09-03",
+    "vacation_days_left": 24, "salary": 900000, "personnel_number": "00002"
+  },
+  {
+    "id": "u-3", "email": "employee@janamen.kz", "password": "Passw0rd!", "role": "employee",
+    "full_name": "Данияр Касымов", "company": "JanaMen Group", "position": "Backend-разработчик",
+    "department": "IT", "manager_id": "u-2", "hire_date": "2022-02-14",
+    "vacation_days_left": 21, "salary": 600000, "personnel_number": "00103"
+  },
+  {
+    "id": "u-4", "email": "employee2@janamen.kz", "password": "Passw0rd!", "role": "employee",
+    "full_name": "Асель Нурланова", "company": "JanaMen Group", "position": "QA-инженер",
+    "department": "IT", "manager_id": "u-2", "hire_date": "2023-06-01",
+    "vacation_days_left": 12, "salary": 480000, "personnel_number": "00117"
+  },
+  {
+    "id": "u-5", "email": "manager2@janamen.kz", "password": "Passw0rd!", "role": "manager",
+    "full_name": "Марат Ахметов", "company": "JanaMen Group", "position": "Руководитель отдела продаж",
+    "department": "Sales", "manager_id": null, "hire_date": "2020-01-20",
+    "vacation_days_left": 15, "salary": 850000, "personnel_number": "00045"
+  },
+  {
+    "id": "u-6", "email": "sales@janamen.kz", "password": "Passw0rd!", "role": "employee",
+    "full_name": "Жанна Омарова", "company": "JanaMen Group", "position": "Менеджер по продажам",
+    "department": "Sales", "manager_id": "u-5", "hire_date": "2024-04-08",
+    "vacation_days_left": 9, "salary": 420000, "personnel_number": "00152"
+  }
+]

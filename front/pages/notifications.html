@@ -1,0 +1,75 @@
+<section class="hr-page-header">
+  <div class="hr-eyebrow">Личный кабинет</div>
+  <h1 class="hr-page-title">Уведомления</h1>
+  <p class="hr-page-description">Важные события и сообщения, связанные с вашей работой.</p>
+</section>
+
+<div class="hr-toolbar">
+  <div class="hr-tabs" role="tablist" aria-label="Фильтр уведомлений">
+    <button type="button" class="hr-tab is-active" data-filter="all" role="tab" aria-selected="true">
+      Все
+    </button>
+    <button type="button" class="hr-tab" data-filter="unread" role="tab" aria-selected="false">
+      Непрочитанные
+      <span class="hr-notification-count" id="notifications-tab-count" hidden>0</span>
+    </button>
+  </div>
+
+  <button type="button" class="hr-retry-button hr-toolbar-button" id="notifications-read-all" disabled>
+    Отметить все прочитанными
+  </button>
+</div>
+
+<p class="hr-error-message" id="notifications-message" role="alert" hidden></p>
+
+<div id="notifications-state"></div>
+<div class="hr-notifications-list" id="notifications-list"></div>
+
+<template id="notification-template">
+  <article class="hr-notification-item">
+    <button type="button" class="hr-notification-main" data-action="open">
+      <span class="hr-notification-icon"></span>
+      <span class="hr-notification-content">
+        <span class="hr-notification-title">
+          <span class="hr-notification-title-text"></span>
+          <span class="hr-notification-dot" aria-label="Не прочитано"></span>
+        </span>
+        <span class="hr-notification-message"></span>
+        <span class="hr-notification-time"></span>
+      </span>
+    </button>
+
+    <button type="button" class="hr-icon-button hr-notification-read" data-action="read"
+            title="Отметить прочитанным" aria-label="Отметить прочитанным">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+    </button>
+  </article>
+</template>
+
+<template id="notifications-loading-template">
+  <div class="hr-page-loading">
+    <span class="hr-spinner"></span>
+    <span>Загружаем уведомления...</span>
+  </div>
+</template>
+
+<template id="notifications-empty-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+    </div>
+    <h2 class="hr-empty-title"></h2>
+    <p class="hr-empty-description"></p>
+  </div>
+</template>
+
+<template id="notifications-error-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>
+    </div>
+    <h2 class="hr-empty-title">Не удалось загрузить уведомления</h2>
+    <p class="hr-empty-description"></p>
+    <button type="button" class="hr-retry-button">Повторить</button>
+  </div>
+</template>

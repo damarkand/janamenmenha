@@ -1,0 +1,29 @@
+[
+  {
+    "id": "req-1", "type": "vacation", "user_id": "u-3", "status": "approved",
+    "created_at": "2026-06-02T08:15:00Z", "updated_at": "2026-06-03T10:00:00Z",
+    "vacation": {"start_date": "2026-07-06", "end_date": "2026-07-12", "days": 7, "comment": "Летний отпуск"},
+    "decided_by": "u-2",
+    "external_refs": {"zup_doc_id": "ZUP-VAC-00000", "documentolog_doc_id": "DL-000000"},
+    "history": [
+      {"at": "2026-06-02T08:15:00Z", "actor_id": "u-3", "action": "created", "from_status": null, "to_status": "pending"},
+      {"at": "2026-06-03T10:00:00Z", "actor_id": "u-2", "action": "approved", "from_status": "pending", "to_status": "approved", "comment": "Хорошего отдыха!"}
+    ]
+  },
+  {
+    "id": "req-2", "type": "advance", "user_id": "u-4", "status": "pending",
+    "created_at": "2026-10-14T11:30:00Z", "updated_at": "2026-10-14T11:30:00Z",
+    "advance": {"amount": 150000, "reason": "Ремонт автомобиля"},
+    "history": [
+      {"at": "2026-10-14T11:30:00Z", "actor_id": "u-4", "action": "created", "from_status": null, "to_status": "pending"}
+    ]
+  },
+  {
+    "id": "req-3", "type": "vacation", "user_id": "u-6", "status": "pending",
+    "created_at": "2026-10-15T09:00:00Z", "updated_at": "2026-10-15T09:00:00Z",
+    "vacation": {"start_date": "2026-11-16", "end_date": "2026-11-20", "days": 5, "comment": null},
+    "history": [
+      {"at": "2026-10-15T09:00:00Z", "actor_id": "u-6", "action": "created", "from_status": null, "to_status": "pending"}
+    ]
+  }
+]

@@ -1,0 +1,184 @@
+<section class="hr-page-header hr-page-header-row">
+  <div>
+    <div class="hr-eyebrow">Личный кабинет</div>
+    <h1 class="hr-page-title">Заявки</h1>
+    <p class="hr-page-description">Создание и отслеживание ваших обращений.</p>
+  </div>
+
+  <button type="button" class="hr-primary-button" id="requests-create">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    Создать заявку
+  </button>
+</section>
+
+<div class="hr-toolbar">
+  <div class="hr-tabs" id="requests-scopes" role="tablist" aria-label="Список заявок"></div>
+
+  <div class="hr-filters">
+    <select class="hr-select" id="requests-status" aria-label="Статус">
+      <option value="">Все статусы</option>
+      <option value="pending">На рассмотрении</option>
+      <option value="approved">Одобрена</option>
+      <option value="rejected">Отклонена</option>
+      <option value="cancelled">Отменена</option>
+    </select>
+
+    <select class="hr-select" id="requests-type" aria-label="Тип заявки">
+      <option value="">Все типы</option>
+      <option value="vacation">Отпуск</option>
+      <option value="advance">Аванс</option>
+      <option value="sick_leave">Больничный</option>
+      <option value="other">Другое</option>
+    </select>
+  </div>
+</div>
+
+<p class="hr-error-message" id="requests-message" role="alert" hidden></p>
+
+<div id="requests-state"></div>
+<div class="hr-requests-list" id="requests-list"></div>
+
+<!-- Создание заявки -->
+<dialog class="hr-dialog" id="request-create-dialog" aria-labelledby="request-create-title">
+  <form class="hr-dialog-form" id="request-form">
+    <div class="hr-dialog-header">
+      <h2 class="hr-dialog-title" id="request-create-title">Новая заявка</h2>
+      <button type="button" class="hr-icon-button" data-close aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="hr-dialog-body">
+      <div class="hr-field">
+        <span class="hr-label">Тип заявки</span>
+        <div class="hr-tabs" role="tablist" aria-label="Тип заявки">
+          <button type="button" class="hr-tab is-active" data-type="vacation" role="tab" aria-selected="true">Отпуск</button>
+          <button type="button" class="hr-tab" data-type="advance" role="tab" aria-selected="false">Аванс</button>
+        </div>
+      </div>
+
+      <div data-group="vacation">
+        <div class="hr-field-row">
+          <div class="hr-field">
+            <label class="hr-label" for="vacation-start">Дата начала</label>
+            <input class="hr-input" type="date" id="vacation-start" name="start_date" required>
+          </div>
+          <div class="hr-field">
+            <label class="hr-label" for="vacation-end">Дата окончания</label>
+            <input class="hr-input" type="date" id="vacation-end" name="end_date" required>
+          </div>
+        </div>
+
+        <div class="hr-field">
+          <label class="hr-label" for="vacation-comment">Комментарий</label>
+          <textarea class="hr-textarea" id="vacation-comment" name="comment" maxlength="500" placeholder="Например: семейные дела"></textarea>
+          <div class="hr-field-hint" id="vacation-hint"></div>
+        </div>
+      </div>
+
+      <div data-group="advance" hidden>
+        <div class="hr-field">
+          <label class="hr-label" for="advance-amount">Сумма</label>
+          <input class="hr-input" type="number" id="advance-amount" name="amount" min="1" step="any" inputmode="decimal" placeholder="100000" required>
+          <div class="hr-field-hint" id="advance-hint"></div>
+        </div>
+
+        <div class="hr-field">
+          <label class="hr-label" for="advance-reason">Причина</label>
+          <textarea class="hr-textarea" id="advance-reason" name="reason" maxlength="500" placeholder="Например: непредвиденные расходы" required></textarea>
+        </div>
+      </div>
+
+      <p class="hr-error-message" id="request-form-message" role="alert" hidden></p>
+    </div>
+
+    <div class="hr-dialog-footer">
+      <button type="button" class="hr-secondary-button" data-close>Отмена</button>
+      <button type="submit" class="hr-primary-button" id="request-submit">Отправить заявку</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Карточка заявки -->
+<dialog class="hr-dialog" id="request-details-dialog" aria-labelledby="request-details-title">
+  <div class="hr-dialog-header">
+    <h2 class="hr-dialog-title" id="request-details-title">Заявка</h2>
+    <button type="button" class="hr-icon-button" data-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="hr-dialog-body">
+    <span class="hr-status" id="details-status"></span>
+
+    <div class="hr-section-heading">
+      <h3 class="hr-section-title">Общая информация</h3>
+    </div>
+    <div class="hr-info-grid" id="details-meta"></div>
+
+    <div class="hr-section-heading" id="details-fields-heading">
+      <h3 class="hr-section-title">Параметры заявки</h3>
+    </div>
+    <div class="hr-info-grid" id="details-fields"></div>
+
+    <div class="hr-section-heading" id="details-history-heading">
+      <h3 class="hr-section-title">История</h3>
+    </div>
+    <ol class="hr-history" id="details-history"></ol>
+
+    <p class="hr-error-message" id="details-message" role="alert" hidden style="margin-top:16px"></p>
+  </div>
+
+  <div class="hr-dialog-footer" id="details-footer">
+    <div class="hr-field" id="details-decision" hidden>
+      <label class="hr-label" for="details-comment">Комментарий (при отклонении обязателен)</label>
+      <textarea class="hr-textarea" id="details-comment" maxlength="500"></textarea>
+    </div>
+
+    <button type="button" class="hr-danger-button" data-action="cancel" hidden>Отменить заявку</button>
+    <button type="button" class="hr-danger-button" data-action="reject" hidden>Отклонить</button>
+    <button type="button" class="hr-primary-button" data-action="approve" hidden>Одобрить</button>
+  </div>
+</dialog>
+
+<template id="request-template">
+  <button type="button" class="hr-request-item">
+    <span class="hr-request-icon"></span>
+    <span class="hr-request-content">
+      <span class="hr-request-head">
+        <span class="hr-request-title"></span>
+        <span class="hr-status"></span>
+      </span>
+      <span class="hr-request-summary"></span>
+      <span class="hr-request-meta"></span>
+    </span>
+  </button>
+</template>
+
+<template id="requests-loading-template">
+  <div class="hr-page-loading">
+    <span class="hr-spinner"></span>
+    <span>Загружаем заявки...</span>
+  </div>
+</template>
+
+<template id="requests-empty-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>
+    </div>
+    <h2 class="hr-empty-title"></h2>
+    <p class="hr-empty-description"></p>
+  </div>
+</template>
+
+<template id="requests-error-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>
+    </div>
+    <h2 class="hr-empty-title">Не удалось загрузить заявки</h2>
+    <p class="hr-empty-description"></p>
+    <button type="button" class="hr-retry-button">Повторить</button>
+  </div>
+</template>

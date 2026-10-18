@@ -1,0 +1,505 @@
+<style>
+      :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --sidebar-bg: #f9fafb;
+      --surface: #ffffff;
+      --border: #e8eaed;
+      --hover: #f1f3f5;
+      --text: #17191c;
+      --muted: #6b7280;
+      --soft: #f4f5f7;
+      --accent: #0d966f;
+      --accent-bg: #e5f5ef;
+      --danger: #b42318;
+      --danger-bg: #fef3f2;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      padding: 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: #17191c;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .topbar-note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    main {
+      display: grid;
+      flex: 1;
+      place-items: center;
+      padding: 48px 20px;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .auth-heading {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .auth-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 22px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--sidebar-bg);
+      color: var(--accent);
+    }
+
+    .auth-icon svg {
+      width: 25px;
+      height: 25px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h1 {
+      margin: 0 0 9px;
+      font-size: 26px;
+      line-height: 1.3;
+      font-weight: 600;
+      letter-spacing: -0.8px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .auth-card {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: 0 4px 18px rgba(23, 25, 28, 0.025);
+    }
+
+    .field {
+      margin-bottom: 19px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .field input {
+      display: block;
+      width: 100%;
+      height: 44px;
+      padding: 0 13px;
+      border: 1px solid #dfe2e6;
+      border-radius: 9px;
+      background: #ffffff;
+      color: var(--text);
+      font-size: 13px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .field input::placeholder {
+      color: #9ca3af;
+    }
+
+    .field input:hover {
+      border-color: #c8cdd3;
+    }
+
+    .field input:focus {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(13, 150, 111, 0.09);
+    }
+
+    .password-input {
+      padding-right: 45px !important;
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 7px;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      transform: translateY(-50%);
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .password-toggle:hover {
+      background: var(--hover);
+      color: var(--text);
+    }
+
+    .password-toggle svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 2px 0 23px;
+      font-size: 12px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #41454b;
+      cursor: pointer;
+    }
+
+    .remember input {
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .text-link {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .submit-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 9px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .submit-button:hover {
+      background: #0b805f;
+    }
+
+    .submit-button:active {
+      transform: scale(0.99);
+    }
+
+    .submit-button:disabled {
+      cursor: wait;
+      opacity: 0.7;
+    }
+
+    .submit-button svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .message {
+      margin: 0 0 16px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .message.error {
+      border: 1px solid #fecdca;
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .message.success {
+      border: 1px solid #b7e6d5;
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+
+    .message[hidden] {
+      display: none;
+    }
+
+    .security-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .security-note svg {
+      width: 15px;
+      height: 15px;
+      flex: none;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    footer {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      .topbar {
+        min-height: 62px;
+        padding: 0 18px;
+      }
+
+      .topbar-note {
+        font-size: 11px;
+      }
+
+      main {
+        padding: 36px 16px;
+      }
+
+      .auth-heading {
+        margin-bottom: 24px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .auth-card {
+        padding: 22px 18px;
+      }
+
+      .form-options {
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+</style>
+
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="login.html" aria-label="Digital HR — главная">
+        <span class="logo">D</span>
+        <span>Digital HR</span>
+      </a>
+
+      <span class="topbar-note">Корпоративный портал</span>
+    </header>
+
+    <main>
+      <section class="auth-container" aria-labelledby="auth-title">
+        <div class="auth-heading">
+          <div class="auth-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="10" width="16" height="11" rx="2"></rect>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+              <path d="M12 14v3"></path>
+            </svg>
+          </div>
+
+          <h1 id="auth-title">С возвращением</h1>
+          <p class="subtitle">Войдите в свою учётную запись Digital HR</p>
+        </div>
+
+        <div class="auth-card">
+          <form id="login-form">
+            <div class="field">
+              <label for="email">Корпоративная почта</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="example@janamen.kz"
+                autocomplete="username"
+                required
+              >
+            </div>
+
+            <div class="field">
+              <label for="password">Пароль</label>
+              <div class="input-wrapper">
+                <input
+                  class="password-input"
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Введите пароль"
+                  autocomplete="current-password"
+                  required
+                >
+
+                <button
+                  class="password-toggle"
+                  id="password-toggle"
+                  type="button"
+                  aria-label="Показать пароль"
+                  aria-pressed="false"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <p class="message" id="form-message" role="status" aria-live="polite" hidden></p>
+
+            <button class="submit-button" id="submit-button" type="submit">
+              <span>Войти в систему</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div class="security-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          <span>Защищённый доступ к корпоративным данным</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Digital HR · Корпоративная информационная система
+    </footer>
+  </div>
+
+  <script src="js/login.js"></script>

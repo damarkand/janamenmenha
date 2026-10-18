@@ -1,0 +1,44 @@
+<section class="hr-page-header">
+  <div class="hr-eyebrow">Руководителю</div>
+  <h1 class="hr-page-title">Моя команда</h1>
+  <p class="hr-page-description">Загрузка сотрудников, рабочее время, обучение и заявки, которые ждут вашего решения.</p>
+</section>
+
+<div id="team-message" hidden></div>
+<div id="team-state">
+  <div class="hr-page-loading"><span class="hr-spinner"></span><span>Загружаем данные команды...</span></div>
+</div>
+
+<div id="team-body" hidden>
+  <div class="ws-cards" id="team-cards"></div>
+
+  <section class="ws-panel">
+    <div class="ws-panel-head">
+      <h3 class="ws-panel-title">Сотрудники</h3>
+      <span class="ws-muted">часы — за текущую неделю</span>
+    </div>
+    <div class="ws-table-wrap">
+      <table class="ws-table">
+        <thead>
+          <tr>
+            <th>Сотрудник</th>
+            <th>Задачи</th>
+            <th>Часы</th>
+            <th>Обучение</th>
+            <th>Отпуск</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="team-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ws-panel" style="margin-top:12px">
+    <div class="ws-panel-head">
+      <h3 class="ws-panel-title">Заявки на согласование</h3>
+      <button type="button" class="hr-secondary-button" data-page="requests">Все заявки</button>
+    </div>
+    <div class="ws-list" id="team-requests"></div>
+  </section>
+</div>

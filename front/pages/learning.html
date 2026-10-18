@@ -1,0 +1,166 @@
+<section class="hr-page-header hr-page-header-row">
+  <div>
+    <div class="hr-eyebrow">Личный кабинет</div>
+    <h1 class="hr-page-title">Обучение</h1>
+    <p class="hr-page-description">Ваши назначенные курсы и программы обучения.</p>
+  </div>
+
+  <button type="button" class="hr-primary-button" id="learning-assign" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    Назначить курс
+  </button>
+</section>
+
+<div class="hr-toolbar">
+  <div class="hr-tabs" id="learning-tabs" role="tablist" aria-label="Раздел обучения"></div>
+
+  <div class="hr-filters">
+    <select class="hr-select" id="learning-category" aria-label="Категория" hidden></select>
+    <select class="hr-select" id="learning-user" aria-label="Сотрудник" hidden></select>
+  </div>
+</div>
+
+<div id="learning-message" hidden></div>
+
+<div id="learning-state"></div>
+<div class="hr-learning-list" id="learning-list"></div>
+
+<!-- Карточка курса -->
+<dialog class="hr-dialog" id="learning-details-dialog" aria-labelledby="learning-details-title">
+  <div class="hr-dialog-header">
+    <h2 class="hr-dialog-title" id="learning-details-title">Курс</h2>
+    <button type="button" class="hr-icon-button" data-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="hr-dialog-body">
+    <span class="hr-status" id="learning-details-status" hidden></span>
+    <p class="hr-page-description" id="learning-description"></p>
+    <a class="hr-link" id="learning-material" target="_blank" rel="noopener noreferrer" hidden>Открыть материалы курса</a>
+
+    <div class="hr-section-heading">
+      <h3 class="hr-section-title">О курсе</h3>
+    </div>
+    <div class="hr-info-grid" id="learning-info"></div>
+
+    <div id="learning-progress-section" hidden>
+      <div class="hr-section-heading">
+        <h3 class="hr-section-title">Прогресс</h3>
+      </div>
+      <div class="hr-progress" style="margin-top:0">
+        <div class="hr-progress-track"><div class="hr-progress-bar" id="learning-progress-bar"></div></div>
+        <span class="hr-progress-value" id="learning-progress-value">0%</span>
+      </div>
+      <input class="hr-range" type="range" id="learning-progress-range" min="0" max="100" step="5" value="0" aria-label="Прогресс прохождения" hidden>
+    </div>
+
+    <div id="learning-test-section" hidden>
+      <div class="hr-section-heading">
+        <h3 class="hr-section-title">Итоговый тест</h3>
+      </div>
+      <form id="learning-test-form"></form>
+    </div>
+
+    <div id="learning-result" style="margin-top:16px" hidden></div>
+    <p class="hr-error-message" id="learning-details-message" role="alert" hidden style="margin-top:16px"></p>
+  </div>
+
+  <div class="hr-dialog-footer">
+    <button type="button" class="hr-secondary-button" data-action="save" hidden>Сохранить прогресс</button>
+    <button type="button" class="hr-secondary-button" data-action="test" hidden>Пройти тест</button>
+    <button type="button" class="hr-primary-button" data-action="submit" hidden>Отправить ответы</button>
+    <button type="button" class="hr-primary-button" data-action="start" hidden>Начать курс</button>
+    <button type="button" class="hr-primary-button" data-action="enroll" hidden>Записаться на курс</button>
+  </div>
+</dialog>
+
+<!-- Назначение курса -->
+<dialog class="hr-dialog" id="learning-assign-dialog" aria-labelledby="learning-assign-title">
+  <form class="hr-dialog-form" id="learning-assign-form">
+    <div class="hr-dialog-header">
+      <h2 class="hr-dialog-title" id="learning-assign-title">Назначить курс</h2>
+      <button type="button" class="hr-icon-button" data-close aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="hr-dialog-body">
+      <div class="hr-field">
+        <label class="hr-label" for="assign-user">Сотрудник</label>
+        <input class="hr-input" id="assign-user" name="user_id" list="assign-users" placeholder="ID сотрудника, например u-4" autocomplete="off" required>
+        <datalist id="assign-users"></datalist>
+        <div class="hr-field-hint">В подсказках — сотрудники, у которых уже есть назначенные курсы.</div>
+      </div>
+
+      <div class="hr-field">
+        <label class="hr-label" for="assign-course">Курс</label>
+        <select class="hr-select" id="assign-course" name="course_id" required></select>
+      </div>
+
+      <div class="hr-field">
+        <label class="hr-label" for="assign-due">Срок прохождения</label>
+        <input class="hr-input" type="date" id="assign-due" name="due_date">
+      </div>
+
+      <p class="hr-error-message" id="assign-message" role="alert" hidden></p>
+    </div>
+
+    <div class="hr-dialog-footer">
+      <button type="button" class="hr-secondary-button" data-close>Отмена</button>
+      <button type="submit" class="hr-primary-button" id="assign-submit">Назначить</button>
+    </div>
+  </form>
+</dialog>
+
+<template id="learning-item-template">
+  <article class="hr-learning-item">
+    <button type="button" class="hr-learning-main" data-action="open">
+      <span class="hr-request-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-6 10 6-10 6z"/><path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6"/></svg>
+      </span>
+      <span class="hr-request-content">
+        <span class="hr-request-head">
+          <span class="hr-request-title"></span>
+          <span class="hr-status"></span>
+        </span>
+        <span class="hr-request-summary"></span>
+        <span class="hr-progress">
+          <span class="hr-progress-track"><span class="hr-progress-bar"></span></span>
+          <span class="hr-progress-value"></span>
+        </span>
+        <span class="hr-request-meta"></span>
+      </span>
+    </button>
+
+    <button type="button" class="hr-primary-button hr-learning-action" data-action="enroll" hidden>Записаться</button>
+  </article>
+</template>
+
+<template id="learning-loading-template">
+  <div class="hr-page-loading">
+    <span class="hr-spinner"></span>
+    <span>Загружаем курсы...</span>
+  </div>
+</template>
+
+<template id="learning-empty-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-6 10 6-10 6z"/><path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6"/></svg>
+    </div>
+    <h2 class="hr-empty-title"></h2>
+    <p class="hr-empty-description"></p>
+  </div>
+</template>
+
+<template id="learning-error-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>
+    </div>
+    <h2 class="hr-empty-title">Не удалось загрузить данные</h2>
+    <p class="hr-empty-description"></p>
+    <button type="button" class="hr-retry-button">Повторить</button>
+  </div>
+</template>

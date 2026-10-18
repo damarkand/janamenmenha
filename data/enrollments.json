@@ -1,0 +1,6 @@
+[
+  {"id": "enr-1", "user_id": "u-3", "course_id": "c-1", "status": "completed", "progress": 100, "best_score": 100, "attempts": 1, "assigned_by": "u-1", "assigned_at": "2026-09-01T09:00:00Z", "due_date": "2026-09-15", "completed_at": "2026-09-05T14:20:00Z"},
+  {"id": "enr-2", "user_id": "u-3", "course_id": "c-2", "status": "in_progress", "progress": 40, "best_score": null, "attempts": 0, "assigned_by": "u-2", "assigned_at": "2026-10-01T09:00:00Z", "due_date": "2026-10-31", "completed_at": null},
+  {"id": "enr-3", "user_id": "u-4", "course_id": "c-2", "status": "not_started", "progress": 0, "best_score": null, "attempts": 0, "assigned_by": "u-2", "assigned_at": "2026-10-01T09:00:00Z", "due_date": "2026-10-31", "completed_at": null},
+  {"id": "enr-4", "user_id": "u-6", "course_id": "c-1", "status": "in_progress", "progress": 60, "best_score": 33, "attempts": 1, "assigned_by": "u-1", "assigned_at": "2026-09-20T09:00:00Z", "due_date": "2026-10-20", "completed_at": null}
+]

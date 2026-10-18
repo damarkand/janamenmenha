@@ -1,0 +1,94 @@
+<section class="hr-page-header">
+  <div class="hr-page-header-row">
+    <div>
+      <div class="hr-eyebrow">Рабочее пространство</div>
+      <h1 class="hr-page-title">Задачи</h1>
+      <p class="hr-page-description">Личные задачи и поручения руководителя: отчёты, встречи, клиенты, документы — всё в одном месте.</p>
+    </div>
+    <button type="button" class="hr-primary-button" id="task-new">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      Новая задача
+    </button>
+  </div>
+</section>
+
+<div class="hr-toolbar">
+  <div class="hr-tabs" id="task-tabs" role="tablist" aria-label="Чьи задачи"></div>
+  <div class="hr-filters">
+    <select class="hr-select" id="task-member" aria-label="Сотрудник" hidden></select>
+    <select class="hr-select" id="task-category" aria-label="Категория">
+      <option value="">Все категории</option>
+    </select>
+  </div>
+</div>
+
+<div id="task-message" hidden></div>
+<div id="task-state"></div>
+
+<div class="ws-board" id="task-board" hidden>
+  <section class="ws-column" data-status="todo">
+    <div class="ws-column-head"><span>К выполнению</span><span class="ws-tag" data-count></span></div>
+    <div class="ws-column-body"></div>
+  </section>
+  <section class="ws-column" data-status="in_progress">
+    <div class="ws-column-head"><span>В работе</span><span class="ws-tag is-amber" data-count></span></div>
+    <div class="ws-column-body"></div>
+  </section>
+  <section class="ws-column" data-status="done">
+    <div class="ws-column-head"><span>Готово</span><span class="ws-tag is-accent" data-count></span></div>
+    <div class="ws-column-body"></div>
+  </section>
+</div>
+
+<dialog class="hr-dialog" id="task-dialog" aria-labelledby="task-dialog-title">
+  <form method="dialog" class="hr-dialog-form" id="task-form">
+    <div class="hr-dialog-header">
+      <h2 class="hr-dialog-title" id="task-dialog-title">Новая задача</h2>
+      <button type="button" class="hr-icon-button" data-close aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="hr-dialog-body">
+      <div class="hr-field">
+        <label class="hr-label" for="task-title">Название</label>
+        <input class="hr-input" id="task-title" maxlength="200" required placeholder="Например: подготовить отчёт за месяц">
+      </div>
+      <div class="hr-field" style="margin-top:12px">
+        <label class="hr-label" for="task-description">Описание</label>
+        <textarea class="hr-textarea" id="task-description" maxlength="2000"></textarea>
+      </div>
+      <div class="hr-field-row" style="margin-top:12px">
+        <div class="hr-field">
+          <label class="hr-label" for="task-category-input">Категория</label>
+          <input class="hr-input" id="task-category-input" list="task-categories" maxlength="60" value="Общее">
+          <datalist id="task-categories"></datalist>
+        </div>
+        <div class="hr-field">
+          <label class="hr-label" for="task-priority">Приоритет</label>
+          <select class="hr-select" id="task-priority">
+            <option value="low">Низкий</option>
+            <option value="medium" selected>Средний</option>
+            <option value="high">Высокий</option>
+          </select>
+        </div>
+      </div>
+      <div class="hr-field-row" style="margin-top:12px">
+        <div class="hr-field">
+          <label class="hr-label" for="task-due">Срок</label>
+          <input class="hr-input" id="task-due" type="date">
+        </div>
+        <div class="hr-field" id="task-assignee-field" hidden>
+          <label class="hr-label" for="task-assignee">Исполнитель</label>
+          <select class="hr-select" id="task-assignee"></select>
+        </div>
+      </div>
+      <p class="ws-muted" id="task-info" style="margin-top:12px" hidden></p>
+      <p class="hr-error-message" id="task-dialog-message" role="alert" hidden style="margin-top:12px"></p>
+    </div>
+    <div class="hr-dialog-footer">
+      <button type="button" class="hr-danger-button" id="task-delete" hidden>Удалить</button>
+      <button type="button" class="hr-secondary-button" data-close>Отмена</button>
+      <button type="submit" class="hr-primary-button" id="task-save">Сохранить</button>
+    </div>
+  </form>
+</dialog>

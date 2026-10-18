@@ -1,0 +1,109 @@
+<section class="hr-page-header">
+  <div class="hr-eyebrow">Личный кабинет</div>
+  <h1 class="hr-page-title">Мой профиль</h1>
+  <p class="hr-page-description">Ваша информация о работе, организации и доступных ресурсах.</p>
+</section>
+
+<section class="hr-profile-hero">
+  <div class="hr-profile-avatar" data-field="initials">—</div>
+  <div class="hr-profile-identity">
+    <h2 class="hr-profile-name" data-field="full_name">—</h2>
+    <p class="hr-profile-position" data-field="position_line">—</p>
+    <span class="hr-role-chip" data-field="role_label">—</span>
+  </div>
+</section>
+
+<div class="hr-section-heading">
+  <h2 class="hr-section-title">Рабочая информация</h2>
+  <span class="hr-section-caption">Данные из кадровой системы</span>
+</div>
+
+<section class="hr-info-grid">
+  <div class="hr-info-card">
+    <span class="hr-info-label">Электронная почта</span>
+    <span class="hr-info-value" data-field="email">—</span>
+  </div>
+  <div class="hr-info-card">
+    <span class="hr-info-label">Компания</span>
+    <span class="hr-info-value" data-field="company">—</span>
+  </div>
+  <div class="hr-info-card">
+    <span class="hr-info-label">Подразделение</span>
+    <span class="hr-info-value" data-field="department">—</span>
+  </div>
+  <div class="hr-info-card">
+    <span class="hr-info-label">Должность</span>
+    <span class="hr-info-value" data-field="position">—</span>
+  </div>
+  <div class="hr-info-card">
+    <span class="hr-info-label">Непосредственный руководитель</span>
+    <span class="hr-info-value" data-field="manager">—</span>
+  </div>
+  <div class="hr-info-card">
+    <span class="hr-info-label">Дата приёма на работу</span>
+    <span class="hr-info-value" data-field="hire_date">—</span>
+  </div>
+  <div class="hr-info-card">
+    <span class="hr-info-label">Источник данных</span>
+    <span class="hr-info-value" data-field="data_source">—</span>
+  </div>
+  <div class="hr-info-card">
+    <span class="hr-info-label">Уровень доступа</span>
+    <span class="hr-info-value" data-field="access_level">—</span>
+  </div>
+</section>
+
+<div class="hr-section-heading">
+  <h2 class="hr-section-title">Доступные ресурсы</h2>
+</div>
+
+<section class="hr-stats-grid">
+  <div class="hr-stat-card">
+    <span class="hr-stat-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+    </span>
+    <div>
+      <span class="hr-stat-value" data-field="vacation_days_left">—</span>
+      <span class="hr-stat-label">Остаток дней отпуска</span>
+    </div>
+  </div>
+
+  <div class="hr-stat-card">
+    <span class="hr-stat-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 9h18M16 14h2"/></svg>
+    </span>
+    <div>
+      <span class="hr-stat-value" data-field="advance_limit">—</span>
+      <span class="hr-stat-label">Лимит аванса</span>
+    </div>
+  </div>
+</section>
+
+<div class="hr-section-heading">
+  <h2 class="hr-section-title">Моё обучение</h2>
+  <span class="hr-section-caption" data-field="courses_count">0 курсов</span>
+</div>
+
+<div class="hr-courses-list" id="profile-courses"></div>
+
+<template id="course-template">
+  <article class="hr-course-card">
+    <span class="hr-course-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-6 10 6-10 6z"/><path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6"/></svg>
+    </span>
+    <div class="hr-course-details">
+      <h3 class="hr-course-title"></h3>
+      <p class="hr-course-description" hidden></p>
+    </div>
+  </article>
+</template>
+
+<template id="courses-empty-template">
+  <div class="hr-empty-state" style="width:100%">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-6 10 6-10 6z"/><path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6"/></svg>
+    </div>
+    <h3 class="hr-empty-title">Пока нет назначенных курсов</h3>
+    <p class="hr-empty-description">Когда вам назначат обучение, оно появится в этом разделе.</p>
+  </div>
+</template>

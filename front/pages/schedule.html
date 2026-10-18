@@ -1,0 +1,70 @@
+<section class="hr-page-header">
+  <div class="hr-eyebrow">Рабочее пространство</div>
+  <h1 class="hr-page-title">График работы</h1>
+  <p class="hr-page-description" id="schedule-info">Рабочие дни, праздники, отпуска и отмеченное время.</p>
+</section>
+
+<div class="hr-toolbar">
+  <div class="ws-month-nav">
+    <button type="button" class="hr-icon-button" id="month-prev" aria-label="Предыдущий месяц">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <span class="ws-month-title" id="month-title">—</span>
+    <button type="button" class="hr-icon-button" id="month-next" aria-label="Следующий месяц">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <button type="button" class="hr-secondary-button" id="month-today">Сегодня</button>
+  </div>
+  <div class="hr-filters">
+    <select class="hr-select" id="schedule-member" aria-label="Сотрудник" hidden></select>
+  </div>
+</div>
+
+<div id="schedule-message" hidden></div>
+<div class="ws-cards" id="schedule-cards"></div>
+
+<div class="ws-schedule-layout">
+  <section class="ws-panel">
+    <div class="ws-calendar" id="calendar"></div>
+    <div class="ws-legend" style="margin-top:14px">
+      <span class="ws-legend-item"><span class="ws-swatch" style="--sw:#fff;border:1px solid #e7e9e7"></span>Рабочий</span>
+      <span class="ws-legend-item"><span class="ws-swatch" style="--sw:#f1f3f2"></span>Выходной</span>
+      <span class="ws-legend-item"><span class="ws-swatch" style="--sw:#fed7aa"></span>Праздник</span>
+      <span class="ws-legend-item"><span class="ws-swatch" style="--sw:#bfdbfe"></span>Отпуск</span>
+      <span class="ws-legend-item"><span class="ws-swatch" style="--sw:#6366f1;border-radius:50%"></span>Срок задачи</span>
+    </div>
+  </section>
+
+  <aside class="ws-panel" id="day-panel">
+    <div class="ws-panel-head">
+      <h3 class="ws-panel-title" id="day-title">Выберите день</h3>
+      <span class="ws-tag" id="day-type"></span>
+    </div>
+    <div class="ws-list" id="day-tasks"></div>
+    <div class="ws-panel-head" style="margin-top:14px">
+      <h3 class="ws-panel-title">Отмеченное время</h3>
+      <span class="ws-muted" id="day-total"></span>
+    </div>
+    <div class="ws-list" id="day-entries"></div>
+
+    <form id="time-form" style="margin-top:14px" hidden>
+      <div class="hr-field-row">
+        <div class="hr-field">
+          <label class="hr-label" for="time-hours">Часы</label>
+          <input class="hr-input" id="time-hours" type="number" min="0.25" max="24" step="0.25" value="8" required>
+        </div>
+        <div class="hr-field">
+          <label class="hr-label" for="time-task">Задача</label>
+          <select class="hr-select" id="time-task"></select>
+        </div>
+      </div>
+      <div class="hr-field" style="margin-top:10px">
+        <label class="hr-label" for="time-note">Что делали</label>
+        <input class="hr-input" id="time-note" maxlength="300" placeholder="Например: встречи с клиентами">
+      </div>
+      <p class="hr-error-message" id="time-message" role="alert" hidden style="margin-top:10px"></p>
+      <button type="submit" class="hr-primary-button" id="time-submit" style="margin-top:10px;width:100%">Отметить часы</button>
+    </form>
+    <p class="ws-muted" id="time-hint" style="margin-top:12px"></p>
+  </aside>
+</div>

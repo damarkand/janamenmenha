@@ -1,0 +1,109 @@
+<section class="hr-page-header">
+  <div class="hr-eyebrow">Личный кабинет</div>
+  <h1 class="hr-page-title" id="home-greeting">Добрый день</h1>
+  <p class="hr-page-description" id="home-subtitle">Ваши задачи, рабочее время и обучение на одной странице.</p>
+</section>
+
+<div id="home-message" hidden></div>
+<div id="home-state">
+  <div class="hr-page-loading">
+    <span class="hr-spinner"></span>
+    <span>Собираем сводку...</span>
+  </div>
+</div>
+
+<div id="home-body" hidden>
+  <div class="ws-cards" id="home-cards"></div>
+
+  <div class="ws-grid">
+    <section class="ws-panel ws-span-2">
+      <div class="ws-panel-head">
+        <h3 class="ws-panel-title">Рабочие часы за две недели</h3>
+        <div class="ws-legend">
+          <span class="ws-legend-item"><span class="ws-swatch"></span>Отмечено</span>
+          <span class="ws-legend-item"><span class="ws-swatch is-line" style="--sw:#6366f1"></span>План</span>
+          <span class="ws-legend-item"><span class="ws-swatch" style="--sw:#f59e0b"></span>Сверх плана</span>
+        </div>
+      </div>
+      <div class="ws-chart" id="chart-hours"></div>
+    </section>
+
+    <section class="ws-panel">
+      <div class="ws-panel-head"><h3 class="ws-panel-title">Задачи по статусам</h3></div>
+      <div class="ws-chart" id="chart-status"></div>
+    </section>
+
+    <section class="ws-panel">
+      <div class="ws-panel-head"><h3 class="ws-panel-title">Выполнено задач по неделям</h3></div>
+      <div class="ws-chart" id="chart-weeks"></div>
+    </section>
+
+    <section class="ws-panel">
+      <div class="ws-panel-head">
+        <h3 class="ws-panel-title">Ближайшие задачи</h3>
+        <button type="button" class="hr-secondary-button" data-page="tasks">Все задачи</button>
+      </div>
+      <div class="ws-list" id="home-upcoming"></div>
+    </section>
+
+    <section class="ws-panel">
+      <div class="ws-panel-head">
+        <h3 class="ws-panel-title">Обучение</h3>
+        <button type="button" class="hr-secondary-button" data-page="learning">Курсы</button>
+      </div>
+      <div id="chart-learning"></div>
+    </section>
+
+    <section class="ws-panel">
+      <div class="ws-panel-head"><h3 class="ws-panel-title">Задачи по категориям</h3></div>
+      <div id="chart-categories"></div>
+    </section>
+
+    <section class="ws-panel">
+      <div class="ws-panel-head"><h3 class="ws-panel-title">Важные даты</h3></div>
+      <div class="ws-list" id="home-dates"></div>
+    </section>
+
+    <section class="ws-panel ws-span-2">
+      <div class="ws-panel-head"><h3 class="ws-panel-title">Быстрые действия</h3></div>
+      <div class="ws-actions">
+        <button type="button" class="hr-primary-button" data-page="schedule">Отметить часы</button>
+        <button type="button" class="hr-secondary-button" data-page="tasks">Новая задача</button>
+        <button type="button" class="hr-secondary-button" data-page="requests">Подать заявку</button>
+        <button type="button" class="hr-secondary-button" id="home-certificate">Заказать справку</button>
+        <button type="button" class="hr-secondary-button" data-page="assistant">Спросить ассистента</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<dialog class="hr-dialog" id="certificate-dialog" aria-labelledby="certificate-title">
+  <form method="dialog" class="hr-dialog-form" id="certificate-form">
+    <div class="hr-dialog-header">
+      <h2 class="hr-dialog-title" id="certificate-title">Заказать справку</h2>
+      <button type="button" class="hr-icon-button" data-close aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="hr-dialog-body">
+      <div class="hr-field">
+        <label class="hr-label" for="certificate-kind">Документ</label>
+        <select class="hr-select" id="certificate-kind">
+          <option value="employment">Справка с места работы</option>
+          <option value="salary">Справка о заработной плате</option>
+          <option value="vacation_balance">Справка об остатке отпуска</option>
+          <option value="other">Другой документ</option>
+        </select>
+      </div>
+      <div class="hr-field" style="margin-top:12px">
+        <label class="hr-label" for="certificate-comment">Для чего нужна</label>
+        <textarea class="hr-textarea" id="certificate-comment" maxlength="500" placeholder="Например: для банка"></textarea>
+      </div>
+      <p class="hr-error-message" id="certificate-message" role="alert" hidden style="margin-top:12px"></p>
+    </div>
+    <div class="hr-dialog-footer">
+      <button type="button" class="hr-secondary-button" data-close>Отмена</button>
+      <button type="submit" class="hr-primary-button" id="certificate-submit">Отправить в HR</button>
+    </div>
+  </form>
+</dialog>

@@ -1,0 +1,169 @@
+<section class="hr-page-header">
+  <div class="hr-eyebrow">Личный кабинет</div>
+  <h1 class="hr-page-title">Ирби</h1>
+  <p class="hr-page-description">Зайчик-помощник JanaMen: отвечает на вопросы по базе знаний со ссылками на источники, подскажет по задачам и просто поболтает. Работает на нейросети Qwen2.5-3B прямо на сервере.</p>
+  <span class="ws-ai-status" id="ai-status">Проверяем нейросеть...</span>
+</section>
+
+<div class="hr-toolbar">
+  <div class="hr-tabs" id="assistant-tabs" role="tablist" aria-label="Раздел ассистента"></div>
+
+  <div class="hr-filters">
+    <select class="hr-select" id="assistant-status" aria-label="Статус обращения" hidden>
+      <option value="">Все статусы</option>
+      <option value="open">Ожидают ответа</option>
+      <option value="answered">С ответом</option>
+    </select>
+  </div>
+</div>
+
+<div id="assistant-message" hidden></div>
+
+<!-- Чат -->
+<section id="assistant-chat-panel">
+  <div class="hr-chat">
+    <div class="hr-chat-messages" id="chat-messages" aria-live="polite">
+      <div class="hr-chat-welcome" id="chat-welcome">
+        <div class="irbi-avatar irbi-avatar--lg" id="chat-welcome-irbi"></div>
+        <h2 class="hr-empty-title">Привет! Я Ирби</h2>
+        <p class="hr-empty-description" style="margin-left:auto;margin-right:auto">
+          Спросите про отпуск, аванс или свои задачи — или просто расскажите, как прошёл день. Правила компании я беру только из базы знаний, а если ответа там нет, вопрос можно передать HR.
+        </p>
+        <div class="hr-chat-suggestions" id="chat-suggestions"></div>
+      </div>
+    </div>
+
+    <form class="hr-chat-composer" id="chat-form">
+      <textarea class="hr-textarea hr-chat-input" id="chat-input" rows="1" maxlength="1000"
+                placeholder="Напишите Ирби: как перенести отпуск? или как прошёл твой день?" aria-label="Сообщение для Ирби"></textarea>
+      <button type="submit" class="hr-primary-button" id="chat-send">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+        Отправить
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Обращения в HR -->
+<section id="assistant-escalations-panel" hidden>
+  <div id="escalations-state"></div>
+  <div class="hr-requests-list" id="escalations-list"></div>
+</section>
+
+<!-- Карточка обращения -->
+<dialog class="hr-dialog" id="escalation-dialog" aria-labelledby="escalation-title">
+  <div class="hr-dialog-header">
+    <h2 class="hr-dialog-title" id="escalation-title">Обращение</h2>
+    <button type="button" class="hr-icon-button" data-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="hr-dialog-body">
+    <span class="hr-status" id="escalation-status"></span>
+
+    <div class="hr-section-heading">
+      <h3 class="hr-section-title">Вопрос</h3>
+    </div>
+    <p class="hr-text-block" id="escalation-question"></p>
+
+    <div id="escalation-context-block">
+      <div class="hr-section-heading">
+        <h3 class="hr-section-title">Контекст</h3>
+      </div>
+      <p class="hr-text-block" id="escalation-context"></p>
+    </div>
+
+    <div class="hr-section-heading">
+      <h3 class="hr-section-title">Ответ HR</h3>
+    </div>
+    <p class="hr-text-block" id="escalation-answer"></p>
+
+    <div class="hr-section-heading">
+      <h3 class="hr-section-title">Информация</h3>
+    </div>
+    <div class="hr-info-grid" id="escalation-meta"></div>
+
+    <p class="hr-error-message" id="escalation-message" role="alert" hidden style="margin-top:16px"></p>
+  </div>
+
+  <div class="hr-dialog-footer">
+    <div class="hr-field" id="escalation-reply" hidden>
+      <label class="hr-label" for="escalation-reply-input">Ваш ответ</label>
+      <textarea class="hr-textarea" id="escalation-reply-input" maxlength="2000"></textarea>
+    </div>
+
+    <button type="button" class="hr-primary-button" data-action="answer" hidden>Отправить ответ</button>
+  </div>
+</dialog>
+
+<template id="chat-message-template">
+  <article class="hr-chat-message">
+    <div class="irbi-avatar irbi-avatar--sm" hidden></div>
+    <div class="hr-chat-bubble">
+      <p class="hr-chat-text"></p>
+      <div class="hr-chat-meta" hidden></div>
+      <div class="hr-chat-sources" hidden>
+        <span class="hr-chat-sources-title">Источники</span>
+        <ul class="hr-chat-sources-list"></ul>
+      </div>
+      <div class="hr-chat-actions" hidden></div>
+    </div>
+  </article>
+</template>
+
+<template id="chat-typing-template">
+  <article class="hr-chat-message is-assistant">
+    <div class="irbi-avatar irbi-avatar--md"></div>
+    <div class="hr-chat-bubble">
+      <div class="irbi-thinking">
+        <span>Ирби думает</span>
+        <span class="irbi-dots"><i></i><i></i><i></i></span>
+      </div>
+    </div>
+  </article>
+</template>
+
+<template id="escalation-template">
+  <button type="button" class="hr-request-item">
+    <span class="hr-request-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </span>
+    <span class="hr-request-content">
+      <span class="hr-request-head">
+        <span class="hr-request-title hr-clamp"></span>
+        <span class="hr-status"></span>
+      </span>
+      <span class="hr-request-summary hr-clamp"></span>
+      <span class="hr-request-meta"></span>
+    </span>
+  </button>
+</template>
+
+<template id="escalations-loading-template">
+  <div class="hr-page-loading">
+    <span class="hr-spinner"></span>
+    <span>Загружаем обращения...</span>
+  </div>
+</template>
+
+<template id="escalations-empty-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <h2 class="hr-empty-title"></h2>
+    <p class="hr-empty-description"></p>
+  </div>
+</template>
+
+<template id="escalations-error-template">
+  <div class="hr-empty-state">
+    <div class="hr-empty-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>
+    </div>
+    <h2 class="hr-empty-title">Не удалось загрузить обращения</h2>
+    <p class="hr-empty-description"></p>
+    <button type="button" class="hr-retry-button">Повторить</button>
+  </div>
+</template>
